@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './FormValidate.css';
 
-function FormValidate(props) {
 
-    let [inputname, setinputname] = useState('');
-    let [inputcardnum, setinputcardnum] = useState('');
-    let [inputnum, setinputnum] = useState('');
-    let [inputyear, setinputyear] = useState('');
-    let [inputcvc, setinputcvc] = useState('');
-    let [errorcvc, seterrorcvc] = useState('');
-    let [errortext, seterrortext] = useState('');
-    let [errornum, seterrornum] = useState('');
-    let [errormonth, seterrormonth] = useState('');
+const FormValidate = (props) => {
+
+    const [inputname, setinputname] = useState('');
+    const [inputcardnum, setinputcardnum] = useState('');
+    const [inputnum, setinputnum] = useState('');
+    const [inputyear, setinputyear] = useState('');
+    const [inputcvc, setinputcvc] = useState('');
+    const [errorcvc, seterrorcvc] = useState('');
+    const [errortext, seterrortext] = useState('');
+    const [errornum, seterrornum] = useState('');
+    const [errormonth, seterrormonth] = useState('');
+
 
     const validateform = () => {
 
@@ -94,89 +98,100 @@ function FormValidate(props) {
         props.onFormSubmit(formData);
 
     }
+    const notify = () => toast.success('Success message 1', {
+        position: 'top-left',
+        autoClose: 3000, // Auto close the toast after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    });
 
 
 
     return (
-        <div className='main-container'>
-            <div className='div-left'></div>
-            <div className='div-right'>
+        <>
+            <ToastContainer />
+            <div className='main-container'>
 
-                <div className='container'>
+                <div className='div-left'></div>
+                <div className='div-right'>
 
-
-
-                    <form onSubmit={handlesubmit}>
-
-                        <section>
-                            <label>CARDHOLDER NAME</label>
-                            <input type='text' placeholder='e.g. Jane Appleseed'
-
-                                value={inputname} onChange={(e) => {
-                                    setinputname(e.target.value);
-                                }} >
-                            </input>
-                            <p>{errortext}</p>
-                        </section>
-                        <section>
-                            <label>CARD NUMBER</label>
-                            <input type='number' placeholder='e.g. 1234 5678 9123 0000'
-                                value={inputcardnum} onChange={(e) => {
-                                    setinputcardnum(e.target.value);
-                                }}></input>
-                            <p>{errornum}</p>
-                        </section>
-
-                        <section className='detail-labels'>
-                            <label>EXP. DATE (MM/YY)</label>
-                            <label id='label-2'>CVC</label>
-                        </section>
-                        <section className='details'>
-                            <input type='number'
-                                placeholder='MM'
-                                className='infos'
-                                value={inputnum}
-                                min={"1"}
-                                max={"12"}
-                                onChange={(e) => {
-                                    setinputnum(e.target.value);
-                                }}></input>
-
-                            <input type='number'
-                                placeholder='YY'
-                                className='infos'
-                                value={inputyear}
-                                onChange={(e) => {
-                                    setinputyear(e.target.value);
-                                }}
-                            ></input>
-                            <input
-                                type='number'
-                                placeholder='e.g. 123'
-                                id='cvc-info'
-                                min={"100"}
-                                max={"999"}
-                                value={inputcvc}
-                                onChange={(e) => {
-                                    setinputcvc(e.target.value);
-                                }}></input>
-
-                        </section>
-                        <p>{errormonth}</p>
-                        <p id='cvc-error'>{errorcvc}</p>
-                        <button type='submit'>Confirm</button>
+                    <div className='container'>
 
 
-                    </form>
+
+                        <form onSubmit={handlesubmit}>
+
+                            <section>
+                                <label>CARDHOLDER NAME</label>
+                                <input type='text' placeholder='e.g. Jane Appleseed'
+
+                                    value={inputname} onChange={(e) => {
+                                        setinputname(e.target.value);
+                                    }} >
+                                </input>
+                                <p>{errortext}</p>
+                            </section>
+                            <section>
+                                <label>CARD NUMBER</label>
+                                <input type='number' placeholder='e.g. 1234 5678 9123 0000'
+                                    value={inputcardnum} onChange={(e) => {
+                                        setinputcardnum(e.target.value);
+                                    }}></input>
+                                <p>{errornum}</p>
+                            </section>
+
+                            <section className='detail-labels'>
+                                <label>EXP. DATE (MM/YY)</label>
+                                <label id='label-2'>CVC</label>
+                            </section>
+                            <section className='details'>
+                                <input type='number'
+                                    placeholder='MM'
+                                    className='infos'
+                                    value={inputnum}
+                                    min={"1"}
+                                    max={"12"}
+                                    onChange={(e) => {
+                                        setinputnum(e.target.value);
+                                    }}></input>
+
+                                <input type='number'
+                                    placeholder='YY'
+                                    className='infos'
+                                    value={inputyear}
+                                    onChange={(e) => {
+                                        setinputyear(e.target.value);
+                                    }}
+                                ></input>
+                                <input
+                                    type='number'
+                                    placeholder='e.g. 123'
+                                    id='cvc-info'
+                                    min={"100"}
+                                    max={"999"}
+                                    value={inputcvc}
+                                    onChange={(e) => {
+                                        setinputcvc(e.target.value);
+                                    }}></input>
+
+                            </section>
+                            <p>{errormonth}</p>
+                            <p id='cvc-error'>{errorcvc}</p>
+                            <button type='submit' onClick={notify}>Confirm</button>
+
+
+                        </form>
+                    </div>
+
+
                 </div>
 
-
-            </div>
-
-        </div >
-
+            </div >
+        </>
     )
-}
 
+}
 
 export default FormValidate
